@@ -1,11 +1,27 @@
 /********** Template CSS **********/
 :root {
     --primary: #6222CC;
-    --secondary: #FBA504;
+    --secondary: orange;
     --light: #F6F4F9;
     --dark: #04000B;
 }
 
+/* .bg-primary {
+    background-color: #0c67c1 !important;
+}
+
+.text-primary {
+    color: #0c67c1 !important;
+}
+
+.btn-primary {
+    background-color: #0c67c1 !important;
+    border-color: #0c67c1 !important;
+}
+
+.text-secondary {
+    color: #04a8f5 !important;
+} */
 
 /*** Spinner ***/
 #spinner {
@@ -634,6 +650,10 @@ Logo
     height: 100%;
 }
 
+.team .team-item img {
+    max-width: 150px;
+}
+
 /* portfolio-container */
 /* .portfolio-item {
     display: flex;
@@ -643,3 +663,20 @@ Logo
 .portfolio-item .item {
     height: 100%;
 } */
+
+
+.hero-form-wrapper {
+    background-color: #ffffff12;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.hero-form-wrapper h2 {
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.hero-form-wrapper .form-floating>.form-control,
+.form-floating>.form-select {
+    border: 4px solid #ffffff5e;
+}

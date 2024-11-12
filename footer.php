@@ -22,29 +22,6 @@
                  <a class="btn btn-link" href="">Terms & Condition</a>
                  <a class="btn btn-link" href="">Career</a>
              </div>
-             <!-- <div class="col-md-6 col-lg-3">
-                        <p class="section-title text-white h5 mb-4">Gallery<span></span></p>
-                        <div class="row g-2">
-                            <div class="col-4">
-                                <img class="img-fluid" src="img/portfolio-1.jpg" alt="Image">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid" src="img/portfolio-2.jpg" alt="Image">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid" src="img/portfolio-3.jpg" alt="Image">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid" src="img/portfolio-4.jpg" alt="Image">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid" src="img/portfolio-5.jpg" alt="Image">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid" src="img/portfolio-6.jpg" alt="Image">
-                            </div>
-                        </div>
-                    </div> -->
              <div class="col-md-6 col-lg-4">
                  <p class="section-title text-white h5 mb-4">Newsletter<span></span></p>
                  <p>Stay connected for updates and support. Our team is here to assist you whenever you need it. Join us on this journey!</p>
@@ -121,7 +98,6 @@
      $(document).ready(function() {
          $('#newsletterForm1').on('submit', function(event) {
              event.preventDefault(); // Prevent the default form submission
-             console.log("#newsletterForm1")
              // Serialize the form data
              var formData = $(this).serialize();
 
@@ -161,6 +137,69 @@
                  },
                  error: function(xhr, status, error) {
                      $('#responseMessage').html('<p class="text-danger">There was an error submitting the form. Please try again.</p>');
+                 }
+             });
+         });
+     });
+
+     $(document).ready(function() {
+         var date = new Date().getFullYear() + "-" + parseInt(new Date().getMonth() + 1) + "-" + new Date().getDate()
+
+         var forms = $('.form-appointment');
+         forms.map((index, form) => {
+             $(form).find("input[name='appointDate']").attr('min', date);
+             var messageEl = $(form).find('#responseAppointMessage');
+             $(form).on('submit', function(event) {
+                 event.preventDefault(); // Prevent the default form submission
+                 // Serialize the form data
+                 var formData = $(this).serialize();
+                 formData += "&subject=Appointment Booking";
+                 // Submit the form data using jQuery AJAX
+                 $.ajax({
+                     type: 'POST',
+                     url: 'contact.php', // The URL to which the request is sent
+                     data: formData,
+                     success: function(response) {
+                         // Display the response message
+                         messageEl.html('<p class="text-success">Your appointment has been successfully scheduled.</p>');
+                         // Optionally reset the form
+                         form.reset();
+                     },
+                     error: function(xhr, status, error) {
+                         messageEl.html('<p class="text-danger">There was an error submitting the form. Please try again.</p>');
+                         form.reset();
+                     }
+                 });
+             });
+         })
+
+
+     });
+
+     $(document).ready(function() {
+         $('#quoteForm').on('submit', function(event) {
+             event.preventDefault(); // Prevent the default form submission
+             // Serialize the form data
+             var formData = $(this).serialize();
+             formData += "&subject=Free Quote";
+             // Submit the form data using jQuery AJAX
+             $.ajax({
+                 type: 'POST',
+                 url: 'contact.php', // The URL to which the request is sent
+                 data: formData,
+                 success: function(response) {
+                     // Display the response message
+                     $('#responseQuoteMessage').html('<p class="text-success">Your Request for a Free Quote Has Been Submitted!</p>');
+                     // Optionally reset the form
+                     $('#quoteForm')[0].reset();
+                     setTimeout(() => {
+                         $('#responseQuoteMessage').html("");
+                     }, 8000);
+
+                 },
+                 error: function(xhr, status, error) {
+                     $('#responseQuoteMessage').html('<p class="text-danger">There was an error submitting the form. Please try again.</p>');
+                     $('#quoteForm')[0].reset();
                  }
              });
          });
